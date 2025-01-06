@@ -1,10 +1,12 @@
 export const DayLocation = () => {
   return (
-    <div className="bg-[#F9FAFB] rounded-[42px] w-[398px] h-[504px]">
-      <div className="flex px-[40px] justify-between">
+    <div className="bg-[#F9FAFB] rounded-[42px] w-[100%]  flex flex-col items-center">
+      <div className="flex px-[40px] justify-between items-center w-[100%]  mt-[56px] mb-[49px]">
         <div>
-          <h3>January 6, 2025</h3>
-          <h2>Ulan Bator</h2>
+          <h4 className="text-[18px] font-medium text-[#9CA3AF]">
+            January 6, 2025
+          </h4>
+          <h3 className="text-5xl font-[600] text-[#111827]">Ulaanbaatar</h3>
         </div>
         <div>
           <svg
@@ -17,18 +19,18 @@ export const DayLocation = () => {
             <path
               d="M18.4768 25.5772L23.1596 17.2151C26.2226 11.7453 22.2691 5 16 5C9.73095 5 5.77737 11.7453 8.84045 17.2151L13.5232 25.5772C14.6072 27.5128 17.3928 27.5128 18.4768 25.5772Z"
               stroke="#9CA3AF"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
             <circle
               cx="16"
               cy="13"
               r="2"
               stroke="#9CA3AF"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             />
           </svg>
         </div>
