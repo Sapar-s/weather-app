@@ -1,4 +1,4 @@
-export const DayLocation = () => {
+export const DayLocation = ({ selectedCity }) => {
   return (
     <div className="bg-[#F9FAFB] rounded-[42px] w-[100%]  flex flex-col items-center">
       <div className="flex px-[40px] justify-between items-center w-[100%]  mt-[56px] mb-[49px]">
@@ -6,7 +6,7 @@ export const DayLocation = () => {
           <h4 className="text-[18px] font-medium text-[#9CA3AF]">
             January 6, 2025
           </h4>
-          <h3 className="text-5xl font-[600] text-[#111827]">Ulaanbaatar</h3>
+          <h3 className="text-5xl font-[600] text-[#111827]">{selectedCity}</h3>
         </div>
         <div>
           <svg
