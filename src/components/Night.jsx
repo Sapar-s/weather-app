@@ -2,13 +2,18 @@ import { Nav } from "./Navbar";
 import { NightLocation } from "./NightLoc";
 import { TempR } from "./TemperatureR";
 
-export const NightDark = () => {
+export const NightDark = ({ selectedCity }) => {
   return (
-    <div className="w-[414px] h-[828px] rounded-[48px] bg-[#111827bf] backdrop-blur-md p-[8px]">
-      {/* <h1>Ulan Bator</h1> */}
-      <NightLocation />
-      <TempR />
-      <Nav />
-    </div>
+    <>
+      {" "}
+      <div className="absolute bottom-[1vh] right-[8.5vw]">
+        <img src="/moon.svg" alt="" />
+      </div>
+      <div className="w-[414px] h-[828px] rounded-[48px] bg-[#111827bf] backdrop-blur-md p-[8px] relative">
+        <NightLocation selectedCity={selectedCity} />
+        <TempR />
+        <Nav />
+      </div>
+    </>
   );
 };

@@ -1,7 +1,7 @@
 export const Search = ({ search, searched, handlerSelect }) => {
   return (
     <>
-      <div className="flex gap-[16px] absolute top-[84px] left-[4%] z-10 w-[567px] rounded-[48px] py-[16px] px-[24px] bg-[#fff] shadow-[0px 12px 24px 0px]">
+      <div className="flex gap-[16px] absolute top-[1vh] left-[4vw] z-10 w-[567px] rounded-[48px] py-[16px] px-[24px] bg-[#fff] shadow-[0px 12px 24px 0px]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="48"
@@ -23,7 +23,7 @@ export const Search = ({ search, searched, handlerSelect }) => {
           className="w-[100%]"
         />
       </div>
-      <div className="absolute left-[4%] top-[180px] z-10 bg-[#fff]/80 w-[567px] rounded-[24px]">
+      <div className="absolute left-[4vw] top-[11vh] z-10 bg-[#fff]/80 w-[567px] rounded-[24px]">
         {searched.length > 0 &&
           searched.slice(0, 10).map((city, index) => (
             <p

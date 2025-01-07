@@ -1,12 +1,35 @@
-export const NightLocation = () => {
+export const NightLocation = ({ selectedCity }) => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const d = new Date();
+  let month = months[d.getMonth()];
+  // let month = new Date().getMonth();
+
+  let date = new Date().getDate();
+  // console.log(date);
+  let year = new Date().getFullYear();
   return (
     <div className="bg-gradient-to-b from-gray-800 to-transparent rounded-[42px] w-[398px] flex flex-col items-center">
       <div className="flex px-[40px] justify-between items-center w-[100%] mt-[56px] mb-[24px]">
         <div>
-          <h4 className="text-[18px] font-medium text-[#9CA3AF]">
-            January 6, 2025
-          </h4>
-          <h3 className="text-5xl font-[600] text-[#fff] ">Ulaanbaatar</h3>
+          <div className=" flex gap-[5px]">
+            <h4 className="text-[18px] font-medium text-[#9CA3AF]">{month}</h4>
+            <h4 className="text-[18px] font-medium text-[#9CA3AF]">{date},</h4>
+            <h4 className="text-[18px] font-medium text-[#9CA3AF]">{year}</h4>
+          </div>
+          <h3 className="text-5xl font-[600] text-[#fff] ">{selectedCity}</h3>
         </div>
         <div>
           <svg

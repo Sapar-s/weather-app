@@ -4,10 +4,15 @@ import { TempL } from "./TemperatureL";
 
 export const DayLight = ({ selectedCity }) => {
   return (
-    <div className="w-[414px] h-[828px] rounded-[48px] bg-[#ffffffbf] backdrop-blur-[12px] p-[8px] relative">
-      <DayLocation selectedCity={selectedCity} />
-      <TempL />
-      <Nav />
-    </div>
+    <>
+      <div className="absolute top-[1vh] left-[8vw]">
+        <img src="/sun.svg" alt="" />
+      </div>
+      <div className="w-[414px] h-[828px] rounded-[48px] bg-[#ffffff]/75 backdrop-blur-md p-[8px] relative">
+        <DayLocation selectedCity={selectedCity} />
+        <TempL />
+        <Nav />
+      </div>
+    </>
   );
 };

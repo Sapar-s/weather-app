@@ -41,6 +41,14 @@ export default function Home() {
     setSearchValue("");
   };
 
+  // async function getTemp() {
+  //   const result = await fetch(
+  //     "https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${cityName}"
+  //   );
+  //   const data = await result.json();
+  // }
+  // getTemp();
+
   return (
     <div className="flex w-[100vw] h-[100vh] justify-center items-center">
       <Search
@@ -51,7 +59,7 @@ export default function Home() {
       />
       <CircleM />
       <LeftSide selectedCity={selectedCity} />
-      <RightSide />
+      <RightSide selectedCity={selectedCity} />
     </div>
   );
 }
