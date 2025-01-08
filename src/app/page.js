@@ -13,6 +13,8 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState("");
   const [hotTemperature, setHotTemperature] = useState();
   const [coldTemperature, setColdTemperature] = useState();
+  const [weatherSituationDay, setWeatherSituationDay] = useState();
+  const [weatherSituationNight, setWeatherSituationNight] = useState();
 
   async function getData() {
     const result = await fetch("https://countriesnow.space/api/v0.1/countries");
@@ -49,6 +51,8 @@ export default function Home() {
     );
 
     const data = await result.json();
+
+    // console.log(data);
     let inComeMinTemp = data.forecast.forecastday[0].day.maxtemp_c;
     setHotTemperature(inComeMinTemp);
     console.log(inComeMinTemp);
@@ -56,6 +60,16 @@ export default function Home() {
     let inComeMaxTemp = data.forecast.forecastday[0].day.mintemp_c;
     setColdTemperature(inComeMaxTemp);
     console.log(inComeMaxTemp);
+
+    let weatherSituationDay =
+      data.forecast.forecastday[0].hour[14].condition.text;
+    setWeatherSituationDay(weatherSituationDay);
+    console.log(weatherSituationDay);
+
+    let weatherSituationNight =
+      data.forecast.forecastday[0].hour[0].condition.text;
+    setWeatherSituationNight(weatherSituationNight);
+    console.log(weatherSituationNight);
   }
 
   useEffect(() => {
@@ -74,8 +88,16 @@ export default function Home() {
         // setSelectedCity={setSelectedCity}
       />
       <CircleM />
-      <LeftSide selectedCity={selectedCity} hotTemp={hotTemperature} />
-      <RightSide selectedCity={selectedCity} coldTemp={coldTemperature} />
+      <LeftSide
+        selectedCity={selectedCity}
+        hotTemp={hotTemperature}
+        weatherSituationDay={weatherSituationDay}
+      />
+      <RightSide
+        selectedCity={selectedCity}
+        coldTemp={coldTemperature}
+        weatherSituationNight={weatherSituationNight}
+      />
     </div>
   );
 }
