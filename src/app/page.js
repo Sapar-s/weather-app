@@ -5,6 +5,7 @@ import { RightSide } from "@/components/Right";
 import { Search } from "@/components/Search";
 import { CircleM } from "@/components/Middle-Circle";
 import { useEffect, useState } from "react";
+import { SkeletonCard } from "@/components/Skeleton";
 
 export default function Home() {
   const [cities, setCities] = useState([]);
@@ -15,8 +16,10 @@ export default function Home() {
   const [coldTemperature, setColdTemperature] = useState();
   const [weatherSituationDay, setWeatherSituationDay] = useState();
   const [weatherSituationNight, setWeatherSituationNight] = useState();
+  const [loading, setLoading] = useState(true);
 
   async function getData() {
+    setLoading(true);
     const result = await fetch("https://countriesnow.space/api/v0.1/countries");
     const data = await result.json();
     let incomeCities = data.data.map((country) => {
@@ -24,6 +27,7 @@ export default function Home() {
     });
     incomeCities = incomeCities.flat();
     setCities(incomeCities);
+    setLoading(false);
   }
 
   const searchHandler = (e) => {
@@ -46,6 +50,7 @@ export default function Home() {
   };
 
   async function getTemp(selectedCity) {
+    setLoading(true);
     const result = await fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=35bdba08acb445e7bf421157250801&q=${selectedCity}`
     );
@@ -70,6 +75,7 @@ export default function Home() {
       data.forecast.forecastday[0].hour[0].condition.text;
     setWeatherSituationNight(weatherSituationNight);
     console.log(weatherSituationNight);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -78,6 +84,18 @@ export default function Home() {
     getTemp(selectedCity);
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000); // Ачаалал 2 секундээр дуусна
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-around items-center h-screen">
+        <SkeletonCard />
+        <SkeletonCard />
+      </div>
+    );
+  }
   return (
     <div className="flex w-[100vw] h-[100vh] justify-center items-center">
       <Search
