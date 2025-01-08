@@ -1,4 +1,4 @@
-export const Search = ({ search, searched, handlerSelect }) => {
+export const Search = ({ search, searched, handlerSelect, searchValue }) => {
   return (
     <>
       <div className="flex gap-[16px] absolute top-[1vh] left-[4vw] z-10 w-[567px] rounded-[48px] py-[16px] px-[24px] bg-[#fff] shadow-[0px 12px 24px 0px]">
@@ -18,9 +18,10 @@ export const Search = ({ search, searched, handlerSelect }) => {
         </svg>
         <input
           type="text"
+          value={searchValue}
           placeholder="Search"
           onChange={search}
-          className="w-[100%]"
+          className="w-[100%] placeholder:text-[32px]"
         />
       </div>
       <div className="absolute left-[4vw] top-[11vh] z-10 bg-[#fff]/80 w-[567px] rounded-[24px]">

@@ -4,13 +4,15 @@ import { LeftSide } from "@/components/Left";
 import { RightSide } from "@/components/Right";
 import { Search } from "@/components/Search";
 import { CircleM } from "@/components/Middle-Circle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [cities, setCities] = useState([]);
   const [searched, setSearched] = useState([]);
-  const [selectedCity, setSelectedCity] = useState([]);
+  const [selectedCity, setSelectedCity] = useState("Ulan Bator");
   const [searchValue, setSearchValue] = useState("");
+  const [hotTemperature, setHotTemperature] = useState();
+  const [coldTemperature, setColdTemperature] = useState();
 
   async function getData() {
     const result = await fetch("https://countriesnow.space/api/v0.1/countries");
@@ -22,15 +24,14 @@ export default function Home() {
     setCities(incomeCities);
   }
 
-  getData();
-
   const searchHandler = (e) => {
-    const search = e.target.value;
+    const search = e.target.value.toLowerCase();
+    setSearchValue(search.toLowerCase());
     const filtered = cities.filter((city) => {
       if (!search) {
         return false;
       }
-      return city.includes(search);
+      return city.toLowerCase().includes(search);
     });
     setSearched(filtered);
   };
@@ -39,15 +40,29 @@ export default function Home() {
     setSelectedCity(city);
     setSearched([]);
     setSearchValue("");
+    getTemp(city);
   };
 
-  // async function getTemp() {
-  //   const result = await fetch(
-  //     "https://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${cityName}"
-  //   );
-  //   const data = await result.json();
-  // }
-  // getTemp();
+  async function getTemp(selectedCity) {
+    const result = await fetch(
+      `https://api.weatherapi.com/v1/forecast.json?key=35bdba08acb445e7bf421157250801&q=${selectedCity}`
+    );
+
+    const data = await result.json();
+    let inComeMinTemp = data.forecast.forecastday[0].day.maxtemp_c;
+    setHotTemperature(inComeMinTemp);
+    console.log(inComeMinTemp);
+
+    let inComeMaxTemp = data.forecast.forecastday[0].day.mintemp_c;
+    setColdTemperature(inComeMaxTemp);
+    console.log(inComeMaxTemp);
+  }
+
+  useEffect(() => {
+    getData();
+
+    getTemp(selectedCity);
+  }, []);
 
   return (
     <div className="flex w-[100vw] h-[100vh] justify-center items-center">
@@ -55,11 +70,12 @@ export default function Home() {
         handlerSelect={handlerSelect}
         search={searchHandler}
         searched={searched}
+        searchValue={searchValue}
         // setSelectedCity={setSelectedCity}
       />
       <CircleM />
-      <LeftSide selectedCity={selectedCity} />
-      <RightSide selectedCity={selectedCity} />
+      <LeftSide selectedCity={selectedCity} hotTemp={hotTemperature} />
+      <RightSide selectedCity={selectedCity} coldTemp={coldTemperature} />
     </div>
   );
 }
