@@ -5,11 +5,10 @@ import { RightSide } from "@/components/Right";
 import { Search } from "@/components/Search";
 import { CircleM } from "@/components/Middle-Circle";
 import { useEffect, useState } from "react";
-import { SkeletonCard } from "@/components/Skeleton";
 
 export default function Home() {
   const [cities, setCities] = useState([]);
-  const [searched, setSearched] = useState([]);
+  const [searched, setSearched] = useState({});
   const [selectedCity, setSelectedCity] = useState("Ulan Bator");
   const [searchValue, setSearchValue] = useState("");
   const [hotTemperature, setHotTemperature] = useState();
@@ -19,25 +18,36 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   async function getData() {
-    setLoading(true);
     const result = await fetch("https://countriesnow.space/api/v0.1/countries");
     const data = await result.json();
     let incomeCities = data.data.map((country) => {
-      return country.cities;
+      let yu = country.cities.map((arr) => {
+        return { country: country.country, city: arr };
+      });
+      return yu;
     });
+
+    // ["Ulannbaatar", "To"]
+    // [{country:"Mongolia", city:"Ulaanbat"}, { count}]
     incomeCities = incomeCities.flat();
+    console.log(incomeCities);
     setCities(incomeCities);
-    setLoading(false);
+
+    // let countries = data.data;
+    // let arr = countries.flat();
+    // console.log("ulsuud", arr);
   }
 
   const searchHandler = (e) => {
     const search = e.target.value.toLowerCase();
     setSearchValue(search.toLowerCase());
-    const filtered = cities.filter((city) => {
+
+    const filtered = cities?.filter((city) => {
       if (!search) {
         return false;
       }
-      return city.toLowerCase().includes(search);
+      const city1 = city.city;
+      return city1.toLowerCase().includes(search);
     });
     setSearched(filtered);
   };
@@ -50,7 +60,6 @@ export default function Home() {
   };
 
   async function getTemp(selectedCity) {
-    setLoading(true);
     const result = await fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=35bdba08acb445e7bf421157250801&q=${selectedCity}`
     );
@@ -84,18 +93,9 @@ export default function Home() {
     getTemp(selectedCity);
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => setLoading(false), 2000); // Ачаалал 2 секундээр дуусна
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex justify-around items-center h-screen">
-        <SkeletonCard />
-        <SkeletonCard />
-      </div>
-    );
-  }
+  // useEffect(() => {
+  //   setTimeout(() => setLoading(false), 2000); // Ачаалал 2 секундээр дуусна
+  // }, []);
   return (
     <div className="flex w-[100vw] h-[100vh] justify-center items-center">
       <Search
@@ -103,18 +103,19 @@ export default function Home() {
         search={searchHandler}
         searched={searched}
         searchValue={searchValue}
-        // setSelectedCity={setSelectedCity}
       />
       <CircleM />
       <LeftSide
         selectedCity={selectedCity}
         hotTemp={hotTemperature}
         condition={dayCondition}
+        loading={loading}
       />
       <RightSide
         selectedCity={selectedCity}
         coldTemp={coldTemperature}
         condition={nightCondition}
+        loading={loading}
       />
     </div>
   );

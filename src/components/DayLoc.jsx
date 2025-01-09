@@ -1,4 +1,8 @@
-export const DayLocation = ({ selectedCity, condition }) => {
+// import { Skeleton } from "./Skeleton";
+import { SkeletonCard } from "@/components/Skeleton";
+import { SkeletonCardB } from "@/components/Skeleton";
+
+export const DayLocation = ({ selectedCity, condition, loading }) => {
   const months = [
     "January",
     "February",
@@ -20,14 +24,6 @@ export const DayLocation = ({ selectedCity, condition }) => {
   let date = new Date().getDate();
   // console.log(date);
   let year = new Date().getFullYear();
-  // console.log(year);
-
-  // months.map((month)=>{
-  //   if(date === month.){
-
-  //   }
-  // })
-  // console.log(weatherSituationDay);
 
   const getImg = (condition) => {
     let text = condition.toLowerCase();
@@ -58,44 +54,59 @@ export const DayLocation = ({ selectedCity, condition }) => {
 
   return (
     <div className="bg-[#F9FAFB] rounded-[42px] w-[100%]  flex flex-col items-center">
-      <div className="flex px-[40px] justify-between items-center w-[100%]  mt-[56px] mb-[49px]">
-        <div>
-          <div className=" flex gap-[5px]">
-            <h4 className="text-[18px] font-medium text-[#9CA3AF]">{month}</h4>
-            <h4 className="text-[18px] font-medium text-[#9CA3AF]">{date},</h4>
-            <h4 className="text-[18px] font-medium text-[#9CA3AF]">{year}</h4>
+      {loading ? (
+        <SkeletonCard />
+      ) : (
+        <div className="flex px-[40px] justify-between items-center w-[100%]  mt-[56px] mb-[49px]">
+          <div>
+            <div className=" flex gap-[5px]">
+              <h4 className="text-[18px] font-medium text-[#9CA3AF]">
+                {month}
+              </h4>
+              <h4 className="text-[18px] font-medium text-[#9CA3AF]">
+                {date},
+              </h4>
+              <h4 className="text-[18px] font-medium text-[#9CA3AF]">{year}</h4>
+            </div>
+
+            <h3 className="text-5xl font-[600] text-[#111827]">
+              {selectedCity}
+            </h3>
           </div>
 
-          <h3 className="text-5xl font-[600] text-[#111827]">{selectedCity}</h3>
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+            >
+              <path
+                d="M18.4768 25.5772L23.1596 17.2151C26.2226 11.7453 22.2691 5 16 5C9.73095 5 5.77737 11.7453 8.84045 17.2151L13.5232 25.5772C14.6072 27.5128 17.3928 27.5128 18.4768 25.5772Z"
+                stroke="#9CA3AF"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <circle
+                cx="16"
+                cy="13"
+                r="2"
+                stroke="#9CA3AF"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </div>
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-          >
-            <path
-              d="M18.4768 25.5772L23.1596 17.2151C26.2226 11.7453 22.2691 5 16 5C9.73095 5 5.77737 11.7453 8.84045 17.2151L13.5232 25.5772C14.6072 27.5128 17.3928 27.5128 18.4768 25.5772Z"
-              stroke="#9CA3AF"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <circle
-              cx="16"
-              cy="13"
-              r="2"
-              stroke="#9CA3AF"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      </div>
-      <div className="w-[260px] h-[260px]">{getImg(condition)}</div>
+      )}
+      {loading ? (
+        <SkeletonCardB />
+      ) : (
+        <div className="w-[260px] h-[260px]">{getImg(condition)}</div>
+      )}
     </div>
   );
 };

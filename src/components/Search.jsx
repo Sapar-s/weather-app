@@ -33,7 +33,7 @@ export const Search = ({ search, searched, handlerSelect, searchValue }) => {
               className="flex gap-[10px] items-center px-[24px] py-[8px] cursor-pointer hover:bg-[#f9f9f9] hover:rounded-[24px]"
             >
               <img src="/loc.svg" alt="" />
-              {city}
+              {city.city}, {city.country}
             </p>
           ))}
       </div>
