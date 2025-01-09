@@ -11,8 +11,8 @@ export default function Home() {
   const [searched, setSearched] = useState({});
   const [selectedCity, setSelectedCity] = useState("Ulan Bator");
   const [searchValue, setSearchValue] = useState("");
-  const [hotTemperature, setHotTemperature] = useState();
-  const [coldTemperature, setColdTemperature] = useState();
+  const [hotTemperature, setHotTemperature] = useState("");
+  const [coldTemperature, setColdTemperature] = useState("");
   const [dayCondition, setDayCondition] = useState("");
   const [nightCondition, setNightCondition] = useState("");
   const [loading, setLoading] = useState(true);
@@ -30,7 +30,7 @@ export default function Home() {
     // ["Ulannbaatar", "To"]
     // [{country:"Mongolia", city:"Ulaanbat"}, { count}]
     incomeCities = incomeCities.flat();
-    console.log(incomeCities);
+    // console.log(incomeCities);
     setCities(incomeCities);
 
     // let countries = data.data;
@@ -42,7 +42,7 @@ export default function Home() {
     const search = e.target.value.toLowerCase();
     setSearchValue(search.toLowerCase());
 
-    const filtered = cities?.filter((city) => {
+    const filtered = cities.filter((city) => {
       if (!search) {
         return false;
       }
@@ -53,10 +53,12 @@ export default function Home() {
   };
 
   const handlerSelect = (city) => {
-    setSelectedCity(city);
+    let realCity = city.city;
+    // console.log("city yu ve:>> ", realCity);
+    setSelectedCity(realCity);
     setSearched([]);
     setSearchValue("");
-    getTemp(city);
+    getTemp(realCity);
   };
 
   async function getTemp(selectedCity) {
@@ -69,7 +71,7 @@ export default function Home() {
     // console.log(data);
     let inComeMinTemp = data.forecast.forecastday[0].day.maxtemp_c;
     setHotTemperature(inComeMinTemp);
-    // console.log(inComeMinTemp);
+    // console.log(data);
 
     let inComeMaxTemp = data.forecast.forecastday[0].day.mintemp_c;
     setColdTemperature(inComeMaxTemp);
