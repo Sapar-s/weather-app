@@ -1,4 +1,4 @@
-export const DayLocation = ({ selectedCity }) => {
+export const DayLocation = ({ selectedCity, condition }) => {
   const months = [
     "January",
     "February",
@@ -27,6 +27,34 @@ export const DayLocation = ({ selectedCity }) => {
 
   //   }
   // })
+  // console.log(weatherSituationDay);
+
+  const getImg = (condition) => {
+    let text = condition.toLowerCase();
+
+    switch (true) {
+      case text.includes("sunny"):
+        return <img src="/sunny.png" alt="" />;
+
+      case text.includes("overcast"):
+        return <img src="/sunCloud.png" alt="" />;
+
+      case text.includes("cloud"):
+        return <img src="/sunCloud.png" alt="" />;
+
+      case text.includes("wind"):
+        return <img src="/sunWindy.png" alt="" />;
+
+      case text.includes("rain"):
+        return <img src="/sunRainy.png" alt="" />;
+
+      case text.includes("snow"):
+        return <img src="/sunSnowy.png" alt="" />;
+
+      case text.includes("thunderstorm"):
+        return <img src="/sunThunderstorm.png" alt="" />;
+    }
+  };
 
   return (
     <div className="bg-[#F9FAFB] rounded-[42px] w-[100%]  flex flex-col items-center">
@@ -67,13 +95,7 @@ export const DayLocation = ({ selectedCity }) => {
           </svg>
         </div>
       </div>
-      <div>
-        <img
-          className="w-[262.1px] h-[262.1px]"
-          src="https://s3-alpha-sig.figma.com/img/3c6b/babb/0657324bf17d1bd5169b60a7fbcb80b1?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Pra0N4Cxxv-ewi0qhKIEJwVG-qSQezH7Q6S1fZm9xI5CbB4rFJvfCDeC0E8xxsaek9gkYMBfhocmMCEiHaXpnXaoMAmib~KnIUzRk97v1ljdZrQDtNb-10iL18XqBFdH-S0nPWiBZ4MRUVItu4ZDz7HLXsHPdNFM4YniGfm5wMKFIzIUxNEluKrLxvjqzRPaU1G2K1lgL~yYnISdOqpxgPTqMa31xhRyyuQlEJLrl1CYAcr4z0PjoeujFyuAM5LF3YsBVVMwoTNQmzqmttZsjNH3pNXDsRbuwxG9ThwApw1TvsuCs8oDJ2n0DwihR6EOmMBw6jpJgXxmKfM1lxmWsw__"
-          alt=""
-        />
-      </div>
+      <div className="w-[260px] h-[260px]">{getImg(condition)}</div>
     </div>
   );
 };

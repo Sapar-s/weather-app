@@ -1,4 +1,4 @@
-export const TempR = ({ coldTemp, weatherSituationNight }) => {
+export const TempR = ({ coldTemp, condition }) => {
   return (
     <div className=" ml-[40px]">
       <h2 className="text-[104px] h-[197px] font-[700] text-gradient  text-[#F9FAFB]">
@@ -7,7 +7,7 @@ export const TempR = ({ coldTemp, weatherSituationNight }) => {
       </h2>
       <h4 className="text-[24px] text-[#777CCE] mb-[48px]">
         {/* bright */}
-        {weatherSituationNight}
+        {condition}
       </h4>
     </div>
   );

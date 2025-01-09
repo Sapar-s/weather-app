@@ -1,4 +1,4 @@
-export const NightLocation = ({ selectedCity }) => {
+export const NightLocation = ({ selectedCity, condition }) => {
   const months = [
     "January",
     "February",
@@ -20,6 +20,38 @@ export const NightLocation = ({ selectedCity }) => {
   let date = new Date().getDate();
   // console.log(date);
   let year = new Date().getFullYear();
+
+  const getImg = (condition) => {
+    let text = condition.toLowerCase();
+    switch (true) {
+      case text.includes("clear"):
+        return <img src="/clear.png" alt="" />;
+
+      case text.includes("mist"):
+        return <img src="/nightCloud.png" alt="" />;
+
+      case text.includes("fog"):
+        return <img src="/nightCloud.png" alt="" />;
+
+      case text.includes("overcast"):
+        return <img src="/nightCloud.png" alt="" />;
+
+      case text.includes("cloud"):
+        return <img src="/nightCloud.png" alt="" />;
+
+      case text.includes("wind"):
+        return <img src="/nightWindy.png" alt="" />;
+
+      case text.includes("rain"):
+        return <img src="/nightRainy.png" alt="" />;
+
+      case text.includes("snow"):
+        return <img src="/nightSnowy.png" alt="" />;
+
+      case text.includes("thunderstorm"):
+        return <img src="/nightThunderstorm.png" alt="" />;
+    }
+  };
   return (
     <div className="bg-gradient-to-b from-gray-800 to-transparent rounded-[42px] w-[398px] flex flex-col items-center">
       <div className="flex px-[40px] justify-between items-center w-[100%] mt-[56px] mb-[24px]">
@@ -58,13 +90,7 @@ export const NightLocation = ({ selectedCity }) => {
           </svg>
         </div>
       </div>
-      <div>
-        <img
-          className="w-[262.1px] h-[262.1px]"
-          src="https://s3-alpha-sig.figma.com/img/b6fe/b523/f01b7c0c0765dab6de4f9f5cbb022e1d?Expires=1737331200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=ilshppMFSARTdI1JWeQOlhakbR1JVeDnbcra4a6UILH9hOqrOoCAtl1W4QCfJBX8QN8jBc0aBR2laFKsYYbX3DIVpT7gp0OQ5OJ0YcM~wtgba2vJbMijNX75QG5qEkqEwBMCKUbJ1Sh2zXf10p47EdFvLuCjNqjlQQbOPGqZfayGYgkORpy06dIoegj-ZsLR26hq8uC4Z4BFUGfViQs7gsJDOuTYydKGOnIJ9lV7oUp8MkUm4GoDtziY4Zr~CxiAzjBqlTLi~MEdcm0FW4pxSOaZVi4xmsibabFOHqIO5-PSKt5ZOJ1aBVv066oao3IBoMM6X~V-Iqvhb-O8aHIi9A__"
-          alt=""
-        />
-      </div>
+      <div className="w-[262.1px] h-[262.1px]">{getImg(condition)}</div>
     </div>
   );
 };

@@ -14,8 +14,8 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState("");
   const [hotTemperature, setHotTemperature] = useState();
   const [coldTemperature, setColdTemperature] = useState();
-  const [weatherSituationDay, setWeatherSituationDay] = useState();
-  const [weatherSituationNight, setWeatherSituationNight] = useState();
+  const [dayCondition, setDayCondition] = useState("");
+  const [nightCondition, setNightCondition] = useState("");
   const [loading, setLoading] = useState(true);
 
   async function getData() {
@@ -60,21 +60,21 @@ export default function Home() {
     // console.log(data);
     let inComeMinTemp = data.forecast.forecastday[0].day.maxtemp_c;
     setHotTemperature(inComeMinTemp);
-    console.log(inComeMinTemp);
+    // console.log(inComeMinTemp);
 
     let inComeMaxTemp = data.forecast.forecastday[0].day.mintemp_c;
     setColdTemperature(inComeMaxTemp);
-    console.log(inComeMaxTemp);
+    // console.log(inComeMaxTemp);
 
     let weatherSituationDay =
       data.forecast.forecastday[0].hour[14].condition.text;
-    setWeatherSituationDay(weatherSituationDay);
-    console.log(weatherSituationDay);
+    setDayCondition(weatherSituationDay);
+    // console.log(weatherSituationDay);
 
     let weatherSituationNight =
       data.forecast.forecastday[0].hour[0].condition.text;
-    setWeatherSituationNight(weatherSituationNight);
-    console.log(weatherSituationNight);
+    setNightCondition(weatherSituationNight);
+    // console.log(weatherSituationNight);
     setLoading(false);
   }
 
@@ -109,12 +109,12 @@ export default function Home() {
       <LeftSide
         selectedCity={selectedCity}
         hotTemp={hotTemperature}
-        weatherSituationDay={weatherSituationDay}
+        condition={dayCondition}
       />
       <RightSide
         selectedCity={selectedCity}
         coldTemp={coldTemperature}
-        weatherSituationNight={weatherSituationNight}
+        condition={nightCondition}
       />
     </div>
   );

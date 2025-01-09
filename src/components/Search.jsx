@@ -21,7 +21,7 @@ export const Search = ({ search, searched, handlerSelect, searchValue }) => {
           value={searchValue}
           placeholder="Search"
           onChange={search}
-          className="w-[100%] placeholder:text-[32px]"
+          className="w-[100%] placeholder:text-[32px] focus:outline-none  text-[32px]"
         />
       </div>
       <div className="absolute left-[4vw] top-[11vh] z-10 bg-[#fff]/80 w-[567px] rounded-[24px]">
