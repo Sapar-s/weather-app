@@ -1,9 +1,14 @@
 import { Nav } from "./Navbar";
-import { NightLocation } from "./NightLoc";
-import { TempR } from "./TemperatureR";
+import { Upper } from "./RightCardUpper";
+import { Temp } from "./Temperature";
 
-export const NightDark = ({ selectedCity, coldTemp, condition, loading }) => {
-  // console.log(weatherSituationNight, "orj ireh utga");
+export const RightCard = ({
+  selectedCity,
+  nightTemp,
+  condition,
+  loading,
+  cold,
+}) => {
   return (
     <>
       {" "}
@@ -11,12 +16,17 @@ export const NightDark = ({ selectedCity, coldTemp, condition, loading }) => {
         <img src="/moon.svg" alt="" />
       </div>
       <div className="w-[414px] h-[828px] rounded-[48px] bg-[#111827bf] backdrop-blur-md p-[8px] relative">
-        <NightLocation
+        <Upper
           selectedCity={selectedCity}
           condition={condition}
           loading={loading}
         />
-        <TempR coldTemp={coldTemp} condition={condition} loading={loading} />
+        <Temp
+          dayTemp={nightTemp}
+          condition={condition}
+          loading={loading}
+          isDay={false}
+        />
         <Nav />
       </div>
     </>

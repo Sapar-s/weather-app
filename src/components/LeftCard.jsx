@@ -1,20 +1,31 @@
-import { DayLocation } from "./DayLoc";
+import { Upper } from "./LeftCardUpper";
 import { Nav } from "./Navbar";
-import { TempL } from "./TemperatureL";
+import { Temp } from "./Temperature";
 
-export const DayLight = ({ selectedCity, hotTemp, condition, loading }) => {
+export const LeftCard = ({
+  selectedCity,
+  dayTemp,
+  condition,
+  loading,
+  hot,
+}) => {
   return (
     <>
       <div className="absolute top-[1vh] left-[8vw]">
         <img src="/sun.svg" alt="" />
       </div>
       <div className="w-[414px] h-[828px] rounded-[48px] bg-[#ffffff]/75 backdrop-blur-md p-[8px] relative">
-        <DayLocation
+        <Upper
           selectedCity={selectedCity}
           condition={condition}
           loading={loading}
         />
-        <TempL hotTemp={hotTemp} condition={condition} loading={loading} />
+        <Temp
+          dayTemp={dayTemp}
+          condition={condition}
+          loading={loading}
+          isDay={true}
+        />
         <Nav />
       </div>
     </>
